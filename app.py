@@ -24,6 +24,8 @@ if sub_100k:
 
 
 st.dataframe(df)
+st.header('Price of cars compared to days listed')
+st.write(px.scatter(df, x='days_listed', y='price'))
 st.header('Vehicle types by Engine size')
 st.write(px.histogram(df, x='cylinders', color='type'))
 
