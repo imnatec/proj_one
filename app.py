@@ -4,7 +4,22 @@ import plotly_express as px
 import plotly.graph_objects as go
 
 df = pd.read_csv('vehicles_us.csv')
+
+#make manufacturer column by pulling from first word in model
 df['manufacturer'] = df['model'].apply(lambda x: x.split()[0])
+
+#Cleaning up data
+df['is_4wd'] = df['is_4wd'].fillna('no info')
+df['paint_color'] = df['paint_color'].fillna('no info')
+df['odometer'] = df['odometer'].fillna(df['odometer'].mean())
+df['model_year'] = df['model_year'].fillna(df['model_year'].median())
+df['cylinders'] = df['cylinders'].fillna(df['cylinders'].median())
+df['cylinders'] = df['cylinders'].astype('category')
+df['transmission'] = df['transmission'].astype('category')
+df['fuel'] = df['fuel'].astype('category')
+df['model_year'] = df['model_year'].astype('int')
+df['date_posted'] = pd.to_datetime (df['date_posted'], format='%Y-%m-%d')
+
 
 st.header('Cars for sale')
 
